@@ -10,7 +10,12 @@ private val log = KotlinLogging.logger{}
 @Service
 class ApiServiceImpl(private val apiMapper: ApiMapper): ApiService {
     override fun test():String{
-        val name:String = apiMapper.test()
+        var name:String = "default"
+        try{
+            name = apiMapper.test()
+        } catch(e: Exception){
+            log.info { e.message }
+        }
         return name
     }
 }
