@@ -1,2 +1,0 @@
-# kotlinstudy
-Study
