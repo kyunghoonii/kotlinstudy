@@ -5,10 +5,10 @@ import com.example.demo.api.service.ApiService
 import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
-private val log = KotlinLogging.logger{}
-
 @Service
 class ApiServiceImpl(private val apiMapper: ApiMapper): ApiService {
+    private val log = KotlinLogging.logger{}
+
     override fun test():String{
         var name:String = "default"
         try{

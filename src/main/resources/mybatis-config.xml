@@ -5,6 +5,7 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <mappers>
-        <mapper resource="mappers/api/ApiMapper.xml"/>
+        <mapper resource="mappers/ApiMapper.xml"/>
+        <mapper resource="mappers/LoginMapper.xml"/>
     </mappers>
 </configuration>
