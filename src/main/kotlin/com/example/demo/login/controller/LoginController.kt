@@ -2,8 +2,11 @@ package com.example.demo.login.controller
 
 import com.example.demo.login.service.LoginService
 import com.example.demo.common.CommonResponse
+import com.example.demo.login.LoginRequest
 import mu.KotlinLogging
+import org.json.JSONObject
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,9 +22,9 @@ class LoginController(
 ) {
     private val log = KotlinLogging.logger{}
 
-//    @PostMapping("/passwordCheck")
-//    fun passwordCheck(@RequestBody ): ResponseEntity<CommonResponse<Boolean>> {
-//        val res: CommonResponse<Boolean> = loginService.checkPw(id, password)
-//        return ResponseEntity.ok(CommonResponse.success(data = res.data, code=res.code, msg=res.msg))
-//    }
+    @PostMapping("/password")
+    fun password(@RequestBody body: LoginRequest): ResponseEntity<CommonResponse<Boolean>> {
+        log.info("------------password check init------------")
+        return ResponseEntity.ok(loginService.checkPw(body))
+    }
 }

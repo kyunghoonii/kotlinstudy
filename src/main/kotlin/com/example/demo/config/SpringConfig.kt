@@ -13,7 +13,8 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             // H2 콘솔은 CSRF 제외
-            .csrf { it.ignoringRequestMatchers(PathRequest.toH2Console()) }
+            //.csrf { it.ignoringRequestMatchers(PathRequest.toH2Console()) }
+            .csrf { it.disable() }
             // H2 콘솔이 frame을 쓰므로 sameOrigin 허용
             .headers { it.frameOptions { f -> f.sameOrigin() } }
             // H2 콘솔만 열어주고 나머지는 원하는 정책으로

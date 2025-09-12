@@ -1,7 +1,8 @@
 package com.example.demo.login.service
 
 import com.example.demo.common.CommonResponse
+import com.example.demo.login.LoginRequest
 
 interface LoginService {
-    fun checkPw(id:String, password:String): CommonResponse<Boolean>
+    fun checkPw(body: LoginRequest): CommonResponse<Boolean>
 }

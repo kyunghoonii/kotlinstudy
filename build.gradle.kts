@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
+	implementation("org.json:json:20231013")
 	runtimeOnly("com.h2database:h2")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("io.github.microutils:kotlin-logging:1.12.5")
