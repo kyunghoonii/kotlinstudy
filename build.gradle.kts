@@ -22,7 +22,10 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-aop")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-registry-prometheus")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
 	implementation("org.json:json:20231013")
 	runtimeOnly("com.h2database:h2")
