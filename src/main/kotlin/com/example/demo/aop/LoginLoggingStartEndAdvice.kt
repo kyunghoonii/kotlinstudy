@@ -1,6 +1,6 @@
 package com.example.demo.aop
 
-import com.example.demo.util.CommonUtil
+import com.example.demo.util.CommonUtil.LogBanner.banner as banner
 import mu.KotlinLogging
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
@@ -14,11 +14,11 @@ class LoginLoggingStartEndAdvice {
 
     @Around("@annotation(com.example.demo.aop.LoginLoggingStartEnd)")
     fun atTarget(pjp: ProceedingJoinPoint):Any?{
-        log.info(CommonUtil.LogBanner.banner("Start"))
+        log.info{ banner("Start") }
 
         val result = pjp.proceed()
 
-        log.info(CommonUtil.LogBanner.banner("End"))
+        log.info{ banner("End") }
         return result
     }
 }
