@@ -1,6 +1,7 @@
 package com.example.demo.login.service.impl
 
 import com.example.demo.aop.LoginLoggingStartEnd
+import com.example.demo.aop.Tx
 import com.example.demo.common.CommonResponse
 import com.example.demo.exception.KhErrorCode
 import com.example.demo.login.LoginRequest
@@ -27,7 +28,7 @@ class LoginServiceImpl(
     @LoginLoggingStartEnd
     override fun checkPw(body: LoginRequest): CommonResponse<Boolean> = loggingStopWatch {
         return@loggingStopWatch try{
-            val savedPassword:String = loginMapper.getPassword(body.id)
+            val savedPassword:String = getSavedPassword(body)
             val match:Boolean = passwordEncoder.matches(body.password, savedPassword);
             if(match){
                 log.info{ "login success" }
@@ -40,6 +41,10 @@ class LoginServiceImpl(
             log.info(e.message)
             CommonResponse(data = false, code = KhErrorCode.INVALID_INPUT.code, msg = KhErrorCode.INVALID_INPUT.message)
         }
+    }
+
+    fun getSavedPassword(body: LoginRequest):String = Tx.run {
+        return@run loginMapper.getPassword(body.id)
     }
 
     fun <T> loggingStopWatch(function:() -> T): T {
