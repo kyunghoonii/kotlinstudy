@@ -43,6 +43,14 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.junit.jupiter", "junit-jupiter", "5.6.2")
+	testImplementation("org.assertj", "assertj-core", "3.16.1")
+	testImplementation("org.mockito:mockito-core:4.5.1")
+	testImplementation("org.mockito:mockito-junit-jupiter:4.5.1")
+	testImplementation("org.mockito:mockito-inline:5.2.0")
+
+	// kotest
+	testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
 }
 
 configurations.all {
