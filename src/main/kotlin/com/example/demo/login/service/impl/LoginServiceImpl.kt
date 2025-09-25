@@ -7,14 +7,11 @@ import com.example.demo.exception.KhErrorCode
 import com.example.demo.login.LoginRequest
 import com.example.demo.login.mapper.LoginMapper
 import com.example.demo.login.service.LoginService
-import com.example.demo.util.CommonUtil
 import com.example.demo.util.CommonUtil.LogBanner.banner as banner
 import io.micrometer.core.annotation.Timed
 import mu.KotlinLogging
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-import java.time.Duration
-import java.time.LocalDateTime
 import kotlin.time.measureTimedValue
 
 @Service
@@ -28,7 +25,7 @@ class LoginServiceImpl(
     @LoginLoggingStartEnd
     override fun checkPw(body: LoginRequest): CommonResponse<Boolean> = loggingStopWatch {
         return@loggingStopWatch try{
-            val savedPassword:String = getSavedPassword(body)
+            val savedPassword:String = loginMapper.getPassword(body.id)
             val match:Boolean = passwordEncoder.matches(body.password, savedPassword);
             if(match){
                 log.info{ "login success" }
@@ -43,8 +40,8 @@ class LoginServiceImpl(
         }
     }
 
-    fun getSavedPassword(body: LoginRequest):String = Tx.run {
-        return@run loginMapper.getPassword(body.id)
+    fun getSavedPasswordTransactionalTest(id: String):String = Tx.run {
+        return@run loginMapper.getPassword(id)
     }
 
     fun <T> loggingStopWatch(function:() -> T): T {
