@@ -2,6 +2,7 @@ package com.example.demo.login.controller
 
 import com.example.demo.login.service.LoginService
 import com.example.demo.common.CommonResponse
+import com.example.demo.login.JoinRequest
 import com.example.demo.login.LoginRequest
 import io.micrometer.core.annotation.Timed
 import mu.KotlinLogging
@@ -22,5 +23,11 @@ class LoginController(
     @Timed(value = "login.password.check", extraTags = ["layer","controller"])
     fun password(@RequestBody body: LoginRequest): ResponseEntity<CommonResponse<Boolean>> {
         return ResponseEntity.ok(loginService.checkPw(body))
+    }
+
+    @PostMapping("/join")
+    @Timed(value = "login.join.check", extraTags = ["layer","controller"])
+    fun join(@RequestBody body: JoinRequest) : ResponseEntity<CommonResponse<Boolean>> {
+        return ResponseEntity.ok(loginService.join(body))
     }
 }

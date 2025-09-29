@@ -5,31 +5,38 @@ import com.fasterxml.jackson.annotation.JsonInclude
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CommonResponse<T>(
-    var code: String,
-    var msg: String,
-    var data: T? = null
+    var resultCode: String,
+    var resultMsg: String,
+    var resultData: T? = null
 ) {
     companion object{
         @JvmStatic // Java 코드와의 상호운용성을 위해 추가하면 좋음
-        fun <T> success(code:String, msg:String, data: T?): CommonResponse<T> {
-            return CommonResponse(code, msg, data)
+        fun <T> success(resultCode:String, resultMsg:String, resultData: T?): CommonResponse<T> {
+            return CommonResponse(resultCode, resultMsg, resultData)
         }
 
         // 성공 시 응답 (데이터 미포함)
         @JvmStatic
-        fun <T> success(code:String, msg:String): CommonResponse<T> {
-            return CommonResponse(code, msg, null)
+        fun <T> success(resultCode:String, resultMsg:String): CommonResponse<T> {
+            return CommonResponse(resultCode, resultMsg, null)
+        }
+
+        // 성공 시 응답 (데이터 미포함)
+        @JvmStatic
+        fun <T> success(): CommonResponse<T> {
+            return CommonResponse("0000", "성공.", null)
         }
 
         // 실패 시 응답
         @JvmStatic
-        fun <T> fail(code: String, msg: String, data: T?=null): CommonResponse<T> {
-            return CommonResponse(code, msg, data)
+        fun <T> fail(resultCode: String, resultMsg: String, resultData: T?=null): CommonResponse<T> {
+            return CommonResponse(resultCode, resultMsg, resultData)
         }
 
         @JvmStatic
-        fun <T> fail(code: String, msg: String): CommonResponse<T> {
-            return CommonResponse(code, msg)
+        fun <T> fail(resultCode: String, resultMsg: String): CommonResponse<T> {
+            return CommonResponse(resultCode, resultMsg)
         }
+
     }
 }

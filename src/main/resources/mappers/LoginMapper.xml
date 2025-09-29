@@ -3,6 +3,31 @@
 
 <mapper namespace="com.example.demo.login.mapper.LoginMapper">
     <select id="getPassword" parameterType="string" resultType="string">
-        select mem_pw from tb_member where mem_id = #{id}
+        select  mem_pw
+        from    tb_member
+        where   mem_id = #{userId}
     </select>
+
+    <select id="accountCheck" parameterType="string" resultType="int">
+        select  count(1)
+        from    tb_member
+        where   mem_id = #{userId}
+
+    </select>
+
+    <insert id="insertAccount" parameterType="com.example.demo.login.JoinRequest" useGeneratedKeys="true" keyProperty="userNo">
+<!--        <selectKey keyProperty="id" resultType="long" order="BEFORE">-->
+<!--            SELECT user_seq.NEXTVAL FROM DUAL-->
+<!--        </selectKey>-->
+        insert into tb_member(mem_id
+                            , mem_pw
+                            , mem_name
+                            , mem_mail
+                            , mem_phone)
+                       values(#{userId}
+                            , #{userPw}
+                            , #{userName}
+                            , #{userEmail}
+                            , #{userPhone})
+    </insert>
 </mapper>

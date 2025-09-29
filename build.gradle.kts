@@ -35,7 +35,6 @@ dependencies {
 	implementation("io.micrometer:micrometer-registry-prometheus")
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4")
 	implementation("org.json:json:20231013")
-	runtimeOnly("com.h2database:h2")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("io.github.microutils:kotlin-logging:1.12.5")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2")
@@ -48,6 +47,11 @@ dependencies {
 	testImplementation("org.mockito:mockito-core:4.5.1")
 	testImplementation("org.mockito:mockito-junit-jupiter:4.5.1")
 	testImplementation("org.mockito:mockito-inline:5.2.0")
+
+//	runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.xerial:sqlite-jdbc")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.hibernate.orm:hibernate-community-dialects:6.4.4.Final")
 
 	// kotest
 	testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
