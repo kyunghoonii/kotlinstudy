@@ -63,8 +63,9 @@ class LoginServiceImpl(
 
             val joinRequest:JoinRequest = body.copy()
             joinRequest.userPw = passwordEncoder.encode(joinRequest.userPw)
-            val success = loginMapper.insertAccount(body)
+            val success = loginMapper.insertAccount(joinRequest)
 
+            log.info { "join success" }
             return if(success>0) CommonResponse.success()
             else CommonResponse.fail(KhErrorCode.ACCOUNT_INSERT_FAIL.code, KhErrorCode.ACCOUNT_INSERT_FAIL.message)
         } catch (e:Exception){
@@ -74,7 +75,6 @@ class LoginServiceImpl(
     }
 
     fun paramCheck(case: String, reqData: JoinRequest):Boolean {
-        log.info { "reqData : $reqData" }
          return when (case){
              USER_JOIN_PARAM_CHECK -> { // 회원가입
                  val requiredParams = mapOf(
