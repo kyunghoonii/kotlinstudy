@@ -30,8 +30,7 @@ class LoginServiceImpl(
     override fun checkPw(body: LoginRequest): CommonResponse<Boolean> = loggingStopWatch {
         return@loggingStopWatch try{
             val savedPassword:String = loginMapper.getPassword(body.userId)
-            val match:Boolean = passwordEncoder.matches(body.userPw, savedPassword);
-            if(match){
+            if(passwordEncoder.matches(body.userPw, savedPassword)){
                 log.info{ "login success" }
                 CommonResponse(resultCode = "0000", resultMsg = "일치", resultData = true)
             } else {
@@ -94,5 +93,23 @@ class LoginServiceImpl(
              }
              else -> {false}
          }
+    }
+
+    override fun delete(body: JoinRequest): CommonResponse<Boolean> {
+        log.info { "delete" }
+        val savedPassword:String = loginMapper.getPassword(body.userId)
+        if(!passwordEncoder.matches(body.userPw, savedPassword)){
+//            return CommonResponse.fail(KhErrorCode.INTERNAL_ERROR.code, KhErrorCode.INTERNAL_ERROR.message)
+            return CommonResponse.fail(KhErrorCode.INTERNAL_ERROR.code, KhErrorCode.INTERNAL_ERROR.message)
+        }
+        return runCatching { loginMapper.delete(body.userId) }.fold(
+            onSuccess = { value ->
+                if(value>0) CommonResponse.success()
+                else CommonResponse.fail(KhErrorCode.INTERNAL_ERROR.code, KhErrorCode.INTERNAL_ERROR.message)
+            },
+            onFailure = { e ->
+                CommonResponse.fail(KhErrorCode.INTERNAL_ERROR.code, KhErrorCode.INTERNAL_ERROR.message)
+            }
+        )
     }
 }

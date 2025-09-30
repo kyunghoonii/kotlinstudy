@@ -7,4 +7,5 @@ import com.example.demo.login.LoginRequest
 interface LoginService {
     fun checkPw(body: LoginRequest): CommonResponse<Boolean>
     fun join(body: JoinRequest): CommonResponse<Boolean>
+    fun delete(body: JoinRequest) : CommonResponse<Boolean>
 }

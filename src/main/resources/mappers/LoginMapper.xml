@@ -30,4 +30,8 @@
                             , #{userEmail}
                             , #{userPhone})
     </insert>
+
+    <delete id="delete" parameterType="string">
+        delete from tb_member where mem_id = #{userId}
+    </delete>
 </mapper>

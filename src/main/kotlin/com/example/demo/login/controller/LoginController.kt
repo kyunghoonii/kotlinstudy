@@ -30,4 +30,10 @@ class LoginController(
     fun join(@RequestBody body: JoinRequest) : ResponseEntity<CommonResponse<Boolean>> {
         return ResponseEntity.ok(loginService.join(body))
     }
+
+    @PostMapping("/delete")
+    @Timed(value = "login.delete.check", extraTags = ["layer","controller"])
+    fun out(@RequestBody body:JoinRequest) : ResponseEntity<CommonResponse<Boolean>> {
+        return ResponseEntity.ok(loginService.delete(body))
+    }
 }

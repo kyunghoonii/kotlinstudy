@@ -5,7 +5,8 @@ import org.apache.ibatis.annotations.Mapper
 
 @Mapper
 interface LoginMapper {
-    fun getPassword(id:String): String
-    fun accountCheck(id:String): Int
+    fun getPassword(userId:String): String
+    fun accountCheck(userId:String): Int
     fun insertAccount(joinRequest: JoinRequest): Int
+    fun delete(userId:String):Int
 }
